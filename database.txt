@@ -1,0 +1,50 @@
+############## Very simple way to connect with database ##############
+
+<form action="index.php" method="post">
+    ENTER FIRST NAME<br>
+    <input type="text" name="fname" id="fname">
+    
+    <br><br>
+
+    ENTER LAST NAME
+
+    <br>
+
+    <input type="text" name="lname" id="lname">
+   
+    <br><br>
+    <input type="SUBMIT"> 
+
+</form>
+
+
+<?php
+     $servername="localhost";
+     $username="root";
+     $password="";
+     $dbname="gp.koderma";
+
+     $conn=new mysqli($servername,$username,$password,$dbname);
+
+     if($conn->connect_error)
+     {
+         die("connection failed");
+     }
+
+$f=$_POST['fname'];
+$l=$_POST['lname'];
+
+$sql="INSERT INTO `data` (`sr.`, `fname`, `lname`) VALUES (NULL, '$f', '$l')";
+
+if($conn->query($sql)==true)
+{
+    echo "new record added";
+}
+
+else
+{
+    echo "Error";
+}
+
+$conn->close();
+
